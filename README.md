@@ -14,7 +14,7 @@ This application is a full-featured, review and search platform that combines th
 
 - Movie Rating and Commenting: Authenticated users can rate movies on a scale of 1 to 5 and leave comments. The application ensures that only authenticated users can rate and comment on films.
 
-- Real-time Data Syncing with Elasticsearch: The application syncs data in real-time from the SQL/NoSQL database to Elasticsearch on addition, updating, and deletion of films. This enables powerful search functionality and optimizes performance. (PENDING)
+- Real-time Data Syncing with Elasticsearch: The application syncs data in real-time from the SQL/NoSQL database to Elasticsearch on addition, updating, and deletion of films. This enables powerful search functionality and optimizes performance. **(PENDING)**
 
 - Full-text Search and Filtering with Elasticsearch: Users can search for films by name or description, with an autocomplete feature for ease of use. The search functionality is robust, allowing for misspellings and ignoring common stop words. Users can also filter movies by various attributes like popularity, genre, country, and rating. **(PENDING)**
 

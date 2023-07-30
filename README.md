@@ -9,7 +9,14 @@ This repository contains movies-api code where you can add, update and delete mo
 ## Installation
 
 ```bash
+
+#run following commands in sequence before running the app:
+
 $ npm install
+
+$ npm run prisma:migrate
+
+$ npm run prisma:seed
 ```
 
 ## Running the app
@@ -21,8 +28,6 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
 ```
 
 ## Test

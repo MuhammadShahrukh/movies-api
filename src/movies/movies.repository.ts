@@ -40,21 +40,16 @@ export class MoviesRepository {
     });
   }
 
-  delete(id) {
-    return this.prismaService.movie.update({
+  async delete(id) {
+    await this.prismaService.review.deleteMany({
+      where: {
+        movie_id: id,
+      },
+    });
+
+    await this.prismaService.movie.delete({
       where: {
         id,
-      },
-      data: {
-        deletedAt: new Date(),
-        reviews: {
-          updateMany: {
-            where: {},
-            data: {
-              deletedAt: new Date(),
-            },
-          },
-        },
       },
     });
   }

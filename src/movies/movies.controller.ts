@@ -37,8 +37,9 @@ export class MoviesController {
 
   @UseGuards(AuthenticationGuard)
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.moviesService.delete(id);
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    await this.moviesService.delete(id);
+    return `movie ${id} has been deleted successfully`;
   }
 
   @UseGuards(AuthenticationGuard)

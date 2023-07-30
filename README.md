@@ -60,6 +60,10 @@ $ npm run prisma:migrate
 $ npm run prisma:seed
 ```
 
+You also need to create a .env file which should have below variables:
+DATABASE_URL=""
+JWT_SECRET=""
+
 ## Running the app
 
 ```bash

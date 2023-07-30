@@ -55,3 +55,9 @@ UPDATE mysql.user SET Host='%' WHERE User='root';
 FLUSH PRIVILEGES;
 CREATE DATABASE `movies-directory`;
 ```
+
+## Improvements
+
+- swagger can be added for api documentation
+- two factor authentication to make application more secure
+- unit test coverage can be added to cover upto 100% test

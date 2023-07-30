@@ -12,4 +12,8 @@ export class UsersService {
   findUnique(id) {
     return this.userRepository.findUnique(id);
   }
+
+  findByEmail(id, includePassowrd) {
+    return this.userRepository.findByEmail(id, includePassowrd);
+  }
 }

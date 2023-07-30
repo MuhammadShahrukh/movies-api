@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/common/prisma.service';
+import { PrismaService } from '../common/prisma.service';
 
 @Injectable()
 export class UsersRepository {
@@ -22,6 +22,22 @@ export class UsersRepository {
         username: true,
         first_name: true,
         last_name: true,
+      },
+    });
+  }
+
+  findByEmail(email, includePassowrd = false) {
+    return this.prismaService.user.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        first_name: true,
+        last_name: true,
+        password: includePassowrd,
       },
     });
   }

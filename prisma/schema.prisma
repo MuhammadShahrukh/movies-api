@@ -21,23 +21,25 @@ model User {
 }
 
 model Movie {
-  id           Int      @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
   name         String
-  description  String   @db.Text
+  description  String    @db.Text
   release_date DateTime
   ticket_price Float
   genre        String
   photo_url    String
   country      String
+  deletedAt    DateTime? @updatedAt @map("deleted_at")
   reviews      Review[]
 }
 
 model Review {
-  id       Int    @id @default(autoincrement())
-  rating   Int    @default(1)
-  comment  String @db.Text
-  user_id  Int
-  movie_id Int
-  user     User   @relation(fields: [user_id], references: [id])
-  movie    Movie  @relation(fields: [movie_id], references: [id])
+  id        Int       @id @default(autoincrement())
+  rating    Int       @default(1)
+  comment   String    @db.Text
+  user_id   Int
+  movie_id  Int
+  deletedAt DateTime? @updatedAt @map("deleted_at")
+  user      User      @relation(fields: [user_id], references: [id])
+  movie     Movie     @relation(fields: [movie_id], references: [id])
 }

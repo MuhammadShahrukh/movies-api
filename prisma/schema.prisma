@@ -15,15 +15,15 @@ model User {
   email      String   @unique
   username   String?  @unique
   password   String
-  first_name String
-  last_name  String
+  first_name String?
+  last_name  String?
   reviews    Review[]
 }
 
 model Movie {
   id           Int      @id @default(autoincrement())
   name         String
-  description  String
+  description  String   @db.Text
   release_date DateTime
   ticket_price Float
   genre        String
@@ -34,8 +34,8 @@ model Movie {
 
 model Review {
   id       Int    @id @default(autoincrement())
-  rate     Int    @default(1)
-  comment  String
+  rating   Int    @default(1)
+  comment  String @db.Text
   user_id  Int
   movie_id Int
   user     User   @relation(fields: [user_id], references: [id])

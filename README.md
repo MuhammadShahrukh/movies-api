@@ -37,3 +37,16 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## NOTE
+
+After Installing mysql image, Allow the MySQL root user to connect from any host,
+So your prisma will easily connect with mysql root user. Also create table
+
+```bash
+docker exec -it  mysql-node-sample mysql -p
+
+UPDATE mysql.user SET Host='%' WHERE User='root';
+FLUSH PRIVILEGES;
+CREATE DATABASE `movies-directory`;
+```

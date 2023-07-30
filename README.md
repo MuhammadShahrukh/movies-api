@@ -58,6 +58,7 @@ CREATE DATABASE `movies-directory`;
 
 ## Improvements
 
+- image upload functionality can be added in movie api, and save it cloud services (AWS S3, cloudinary, etc)
 - swagger can be added for api documentation
 - two factor authentication to make application more secure
 - unit test coverage can be added to cover upto 100% test

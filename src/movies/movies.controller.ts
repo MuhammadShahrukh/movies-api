@@ -12,6 +12,7 @@ import {
 
 import { MoviesService } from './movies.service';
 import { AuthenticationGuard } from '../authentication/authentication.guard';
+import { CreateMovieDTO } from './dtos/create-movie.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -25,7 +26,7 @@ export class MoviesController {
 
   @UseGuards(AuthenticationGuard)
   @Post()
-  create(@Body() movie) {
+  create(@Body() movie: CreateMovieDTO) {
     return this.moviesService.create(movie);
   }
 

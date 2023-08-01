@@ -12,6 +12,11 @@ export class SearchMoviesDto {
   @IsString()
   genre: string;
 
+  @Transform(({ value }) => value.toLowerCase())
+  @IsOptional()
+  @IsString()
+  boost_genre: string;
+
   @IsOptional()
   @IsString()
   @Transform(({ value }) => value.toLowerCase())

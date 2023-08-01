@@ -16,15 +16,22 @@ export class GetMoviesDto {
   @Transform(({ value }) => (value ? parseInt(value, 10) : 10), {
     toClassOnly: true,
   })
-  pageSize?: number;
+  pageSize: number;
 
   @IsOptional()
   @IsString()
-  genre?: string;
+  @Transform(({ value }) => value.toLowerCase())
+  genre: string;
 
   @IsOptional()
   @IsString()
-  country?: string;
+  @Transform(({ value }) => value.toLowerCase())
+  boost_genre: string;
+
+  @IsOptional()
+  @IsString()
+  @Transform(({ value }) => value.toLowerCase())
+  country: string;
 
   @IsOptional()
   @IsInt()
@@ -32,5 +39,5 @@ export class GetMoviesDto {
   @Transform(({ value }) => (value ? parseInt(value, 10) : 5), {
     toClassOnly: true,
   })
-  rating?: number;
+  rating: number;
 }

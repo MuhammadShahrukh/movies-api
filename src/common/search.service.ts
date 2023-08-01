@@ -6,14 +6,14 @@ export class SearchService {
   private readonly INDEX = process.env.ELASTICSEARCH_INDEX;
   constructor(private readonly elasticsearchService: ElasticsearchService) {}
 
-  async index({ id, ...movie }) {
+  async index({ id, genre, ...movie }) {
     try {
-      console.log('');
       const result = this.elasticsearchService.index({
         index: this.INDEX,
         id: id,
         body: {
           ...movie,
+          genre: genre.split(',').map((g) => g.trim()),
         },
       });
       return result;
@@ -25,31 +25,49 @@ export class SearchService {
     }
   }
 
-  async search(searchTerm: string, genre?: string, country?: string) {
+  async search(
+    searchTerm: string,
+    genre?: string,
+    country?: string,
+    boost_genre?: string,
+  ) {
     try {
       const filters = [];
 
       if (genre) {
-        filters.push({ term: { genre: genre } });
+        filters.push({ term: { genre } });
       }
 
       if (country) {
-        filters.push({ term: { country: country } });
+        filters.push({ term: { country } });
+      }
+
+      const functions = [];
+      if (boost_genre) {
+        functions.push({
+          filter: { match: { genre: boost_genre } },
+          weight: 5,
+        });
       }
 
       const result = await this.elasticsearchService.search({
         index: this.INDEX,
         body: {
           query: {
-            bool: {
-              must: {
-                multi_match: {
-                  query: searchTerm,
-                  fields: ['name^3', 'description'],
-                  fuzziness: 'AUTO',
+            function_score: {
+              query: {
+                bool: {
+                  must: {
+                    multi_match: {
+                      query: searchTerm,
+                      fields: ['name', 'description'],
+                      fuzziness: 'AUTO',
+                    },
+                  },
+                  filter: filters,
                 },
               },
-              filter: filters,
+              functions: functions,
             },
           },
         },
@@ -70,30 +88,40 @@ export class SearchService {
     genre?: string,
     country?: string,
     rating?: number,
+    boost_genre?,
   ) {
     try {
-      const must = [];
+      const filter = [];
       if (genre) {
-        must.push({
+        filter.push({
           term: {
-            'genre.keyword': genre,
+            genre,
           },
         });
       }
       if (country) {
-        must.push({
+        filter.push({
           term: {
-            'country.keyword': country,
+            country,
           },
         });
       }
       if (rating) {
-        must.push({
+        filter.push({
           range: {
             rating: {
               gte: rating,
             },
           },
+        });
+      }
+
+      const functions = [];
+
+      if (boost_genre) {
+        functions.push({
+          filter: { match: { genre: boost_genre } },
+          weight: 3,
         });
       }
 
@@ -103,8 +131,13 @@ export class SearchService {
         size: pageSize,
         body: {
           query: {
-            bool: {
-              must: must,
+            function_score: {
+              query: {
+                bool: {
+                  filter: filter,
+                },
+              },
+              functions: functions,
             },
           },
         },

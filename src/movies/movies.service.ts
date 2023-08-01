@@ -30,11 +30,18 @@ export class MoviesService {
     return this.movieRepository.findUnique(id);
   }
 
-  get({ page, pageSize, genre, country, rating }: GetMoviesDto) {
-    return this.searchService.get(page, pageSize, genre, country, rating);
+  get({ page, pageSize, genre, country, rating, boost_genre }: GetMoviesDto) {
+    return this.searchService.get(
+      page,
+      pageSize,
+      genre,
+      country,
+      rating,
+      boost_genre,
+    );
   }
 
-  search({ text, genre, country }: SearchMoviesDto) {
-    return this.searchService.search(text, genre, country);
+  search({ text, genre, country, boost_genre }: SearchMoviesDto) {
+    return this.searchService.search(text, genre, country, boost_genre);
   }
 }

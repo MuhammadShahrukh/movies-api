@@ -31,6 +31,7 @@ const seedMovies = async () => {
       id: result.id,
       body: {
         ...movie,
+        genre: movie.genre.split(',').map((genre) => genre.trim()),
       },
     });
   }

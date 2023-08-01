@@ -294,7 +294,13 @@ const Mapping = {
         analyzer: {
           autocomplete: {
             tokenizer: 'autocomplete',
-            filter: ['lowercase'],
+            filter: ['lowercase', 'english_stop'],
+          },
+        },
+        filter: {
+          english_stop: {
+            type: 'stop',
+            stopwords: '_english_',
           },
         },
         tokenizer: {

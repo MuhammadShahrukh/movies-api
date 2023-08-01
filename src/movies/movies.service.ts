@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { MoviesRepository } from './movies.repository';
 import { SearchService } from 'src/common/search.service';
 import { GetMoviesDto } from './dtos/get-movies.dto';
+import { SearchMoviesDto } from './dtos/seach-movies.dto';
 
 @Injectable()
 export class MoviesService {
@@ -33,7 +34,7 @@ export class MoviesService {
     return this.searchService.get(page, pageSize, genre, country, rating);
   }
 
-  search(text: string) {
-    return this.searchService.search(text);
+  search({ text, genre, country }: SearchMoviesDto) {
+    return this.searchService.search(text, genre, country);
   }
 }

@@ -15,6 +15,7 @@ import { MoviesService } from './movies.service';
 import { AuthenticationGuard } from '../authentication/authentication.guard';
 import { CreateMovieDTO } from './dtos/create-movie.dto';
 import { GetMoviesDto } from './dtos/get-movies.dto';
+import { SearchMoviesDto } from './dtos/seach-movies.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -22,8 +23,8 @@ export class MoviesController {
 
   @UseGuards(AuthenticationGuard)
   @Get('/search')
-  async search(@Query('text') text: string) {
-    return this.moviesService.search(text);
+  search(@Query() searchMovieDto: SearchMoviesDto) {
+    return this.moviesService.search(searchMovieDto);
   }
 
   @UseGuards(AuthenticationGuard)

@@ -16,24 +16,15 @@ export class SearchService {
     });
   }
 
-  async search(
-    searchTerm: string,
-    genre?: string,
-    country?: string,
-    rating?: number,
-  ) {
+  async search(searchTerm: string, genre?: string, country?: string) {
     const filters = [];
 
     if (genre) {
-      filters.push({ term: { 'genre.keyword': genre } });
+      filters.push({ term: { genre: genre } });
     }
 
     if (country) {
-      filters.push({ term: { 'country.keyword': country } });
-    }
-
-    if (rating) {
-      filters.push({ range: { rating: { gte: rating } } });
+      filters.push({ term: { country: country } });
     }
 
     const result = await this.elasticsearchService.search({

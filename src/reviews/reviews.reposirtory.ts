@@ -6,7 +6,7 @@ export class ReviewsRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   create(review) {
-    return this.prismaService.review.createMany({
+    return this.prismaService.review.create({
       data: review,
     });
   }

@@ -10,8 +10,8 @@ const createMapping = async () => {
     index: process.env.ELASTICSEARCH_INDEX,
   });
   if (!exists) {
-    let result = await elasticlient.indices.create(Mapping);
-    console.log('Elastic Mapping Created!', result);
+    await elasticlient.indices.create(Mapping);
+    console.log('Elastic Mapping Created!');
   } else {
     console.log('Elastic Mapping Existed Already!');
   }

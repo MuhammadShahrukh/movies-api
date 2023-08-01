@@ -25,22 +25,21 @@ export class MoviesRepository {
   }
 
   create(movie) {
-    const movies = Array.isArray(movie) ? movie : [movie];
-    return this.prismaService.movie.createMany({
-      data: movies,
+    return this.prismaService.movie.create({
+      data: movie,
     });
   }
 
-  update(movie) {
+  update(id: number, movie) {
     return this.prismaService.movie.update({
       where: {
-        id: movie.id,
+        id,
       },
       data: movie,
     });
   }
 
-  async delete(id) {
+  async delete(id: number) {
     await this.prismaService.review.deleteMany({
       where: {
         movie_id: id,
@@ -54,7 +53,7 @@ export class MoviesRepository {
     });
   }
 
-  findUnique(id) {
+  findUnique(id: number) {
     return this.prismaService.movie.findUnique({
       where: {
         id,

@@ -8,20 +8,28 @@ import {
   Body,
   ParseIntPipe,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 
 import { MoviesService } from './movies.service';
 import { AuthenticationGuard } from '../authentication/authentication.guard';
 import { CreateMovieDTO } from './dtos/create-movie.dto';
+import { GetMoviesDto } from './dtos/get-movies.dto';
 
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
 
   @UseGuards(AuthenticationGuard)
+  @Get('/search')
+  async search(@Query('text') text: string) {
+    return this.moviesService.search(text);
+  }
+
+  @UseGuards(AuthenticationGuard)
   @Get()
-  findMany() {
-    return this.moviesService.findMany();
+  get(@Query() getMovieDto: GetMoviesDto) {
+    return this.moviesService.get(getMovieDto);
   }
 
   @UseGuards(AuthenticationGuard)
@@ -31,9 +39,9 @@ export class MoviesController {
   }
 
   @UseGuards(AuthenticationGuard)
-  @Put()
-  update(@Body() movie) {
-    return this.moviesService.update(movie);
+  @Put(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() movie) {
+    return this.moviesService.update(id, movie);
   }
 
   @UseGuards(AuthenticationGuard)

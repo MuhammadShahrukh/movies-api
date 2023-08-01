@@ -1,27 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { MoviesRepository } from './movies.repository';
+import { SearchService } from 'src/common/search.service';
+import { GetMoviesDto } from './dtos/get-movies.dto';
 
 @Injectable()
 export class MoviesService {
-  constructor(private readonly movieRepository: MoviesRepository) {}
+  constructor(
+    private readonly movieRepository: MoviesRepository,
+    private readonly searchService: SearchService,
+  ) {}
 
-  findMany() {
-    return this.movieRepository.findMany();
+  async create(movie) {
+    const movieResult = await this.movieRepository.create(movie);
+    await this.searchService.index(movieResult);
   }
 
-  create(movie) {
-    return this.movieRepository.create(movie);
+  async update(id: number, movie) {
+    await this.movieRepository.update(id, movie);
+    await this.searchService.update(id, movie);
   }
 
-  update(movie) {
-    return this.movieRepository.update(movie);
+  async delete(id: number) {
+    await this.movieRepository.delete(id);
+    await this.searchService.delete(id);
   }
 
-  delete(id) {
-    return this.movieRepository.delete(id);
-  }
-
-  findUnique(id) {
+  findUnique(id: number) {
     return this.movieRepository.findUnique(id);
+  }
+
+  get({ page, pageSize, genre, country, rating }: GetMoviesDto) {
+    return this.searchService.get(page, pageSize, genre, country, rating);
+  }
+
+  search(text: string) {
+    return this.searchService.search(text);
   }
 }

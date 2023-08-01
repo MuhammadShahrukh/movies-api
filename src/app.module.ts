@@ -18,7 +18,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '30m' },
+      signOptions: { expiresIn: '1d' },
     }),
     ReviewsModule,
   ],

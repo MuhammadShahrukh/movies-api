@@ -11,6 +11,16 @@ services:
       - ./database-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --default-authentication-plugin=mysql_native_password
   
+  elasticsearch:
+    image: elasticsearch:8.8.0
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+
   movies-api:
     build: .
     ports:
@@ -23,3 +33,4 @@ services:
 
 volumes:
   db_data:
+  esdata1:

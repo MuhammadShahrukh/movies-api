@@ -1,15 +1,6 @@
-const Users = [
-  {
-    email: 'shahrukh@hotmail.com',
-    username: 'shahrukh',
-    first_name: 'shahrukh',
-    last_name: 'khan',
-    password: '123',
-  },
-];
-
 const Movies = [
   {
+    id: 1,
     name: 'Stranger Things',
     description:
       'When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.',
@@ -20,6 +11,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 2,
     name: 'Money Heist',
     description:
       'A criminal mastermind who goes by "The Professor" has a plan to pull off the biggest heist in recorded history -- to print billions of euros in the Royal Mint of Spain.',
@@ -30,6 +22,7 @@ const Movies = [
     country: 'Spain',
   },
   {
+    id: 3,
     name: 'The Witcher',
     description:
       'Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.',
@@ -40,6 +33,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 4,
     name: 'The Crown',
     description:
       "Follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the twentieth century.",
@@ -50,6 +44,7 @@ const Movies = [
     country: 'United Kingdom',
   },
   {
+    id: 5,
     name: 'Dark',
     description:
       'A family saga with a supernatural twist, set in a German town, where the disappearance of two young children exposes the relationships among four families.',
@@ -60,6 +55,7 @@ const Movies = [
     country: 'Germany',
   },
   {
+    id: 6,
     name: 'Breaking Bad',
     description:
       'A high school chemistry teacher turned methamphetamine manufacturing drug dealer teams with a former student.',
@@ -70,6 +66,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 7,
     name: 'Narcos',
     description:
       'A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar.',
@@ -80,6 +77,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 8,
     name: 'Black Mirror',
     description:
       "An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.",
@@ -90,6 +88,7 @@ const Movies = [
     country: 'United Kingdom',
   },
   {
+    id: 9,
     name: 'Peaky Blinders',
     description:
       'A gangster family epic set in 1900s England, centering on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby.',
@@ -100,6 +99,7 @@ const Movies = [
     country: 'United Kingdom',
   },
   {
+    id: 10,
     name: "The Queen's Gambit",
     description:
       'Orphaned at 9, prodigious introvert Beth Harmon discovers and masters the game of chess in 1960s USA. But, child stardom comes at a price.',
@@ -110,6 +110,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 11,
     name: 'Ozark',
     description:
       'A financial advisor drags his family from Chicago to the Missouri Ozarks, where he must launder $500 million in five years to appease a drug boss.',
@@ -120,6 +121,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 12,
     name: 'Better Call Saul',
     description:
       'The trials and tribulations of criminal lawyer Jimmy McGill in the time before he established his strip-mall law office in Albuquerque, New Mexico.',
@@ -130,6 +132,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 13,
     name: 'Mindhunter',
     description:
       'Set in the late 1970s, two FBI agents are tasked with interviewing serial killers to solve open cases.',
@@ -140,6 +143,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 14,
     name: 'The Umbrella Academy',
     description:
       'A family of former child heroes, now grown apart, must reunite to continue to protect the world.',
@@ -150,6 +154,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 15,
     name: 'Daredevil',
     description:
       'A blind lawyer by day, vigilante by night. Matt Murdock fights the crime of New York as Daredevil.',
@@ -160,6 +165,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 16,
     name: 'House of Cards',
     description:
       'A Congressman works with his equally conniving wife to exact revenge on the people who betrayed him.',
@@ -170,6 +176,7 @@ const Movies = [
     country: 'United States',
   },
   {
+    id: 17,
     name: 'Punisher',
     description:
       "After the murder of his family, Marine veteran Frank Castle becomes the vigilante known as 'The Punisher,' with only one goal in mind: to avenge them.",
@@ -178,111 +185,6 @@ const Movies = [
     genre: 'Action, Adventure, Crime',
     photo_url: 'https://link-to-punisher-poster.com',
     country: 'United States',
-  },
-];
-
-const Reviews = [
-  {
-    rating: 5,
-    comment: 'Great series! Very thrilling.',
-    user_id: 1,
-    movie_id: 1,
-  },
-  {
-    rating: 5,
-    comment: 'Engaging plot with amazing acting.',
-    user_id: 1,
-    movie_id: 2,
-  },
-  {
-    rating: 5,
-    comment: 'A well-crafted fantasy world. Loved it!',
-    user_id: 1,
-    movie_id: 3,
-  },
-  {
-    rating: 5,
-    comment: 'A majestic representation of royal politics.',
-    user_id: 1,
-    movie_id: 4,
-  },
-  {
-    rating: 5,
-    comment: 'Brilliant mystery and family saga.',
-    user_id: 1,
-    movie_id: 5,
-  },
-  {
-    rating: 4,
-    comment: 'Excellent series. A must watch!',
-    user_id: 1,
-    movie_id: 6,
-  },
-  {
-    rating: 4,
-    comment: 'Captivating crime drama.',
-    user_id: 1,
-    movie_id: 7,
-  },
-  {
-    rating: 4,
-    comment: 'Innovative and mind-bending episodes.',
-    user_id: 1,
-    movie_id: 8,
-  },
-  {
-    rating: 4,
-    comment: 'Historical crime drama at its best.',
-    user_id: 1,
-    movie_id: 9,
-  },
-  {
-    rating: 4,
-    comment: 'Brilliant portrayal of a chess prodigy.',
-    user_id: 1,
-    movie_id: 10,
-  },
-  {
-    rating: 2,
-    comment: 'Intriguing story with intense characters.',
-    user_id: 1,
-    movie_id: 11,
-  },
-  {
-    rating: 2,
-    comment: 'Interesting prequel to Breaking Bad.',
-    user_id: 1,
-    movie_id: 12,
-  },
-  {
-    rating: 1,
-    comment: 'Gripping and psychologically intense.',
-    user_id: 1,
-    movie_id: 13,
-  },
-  {
-    rating: 1,
-    comment: 'A fantastic take on a superhero family.',
-    user_id: 1,
-    movie_id: 14,
-  },
-  {
-    rating: 1,
-    comment: 'Dark and gritty superhero series.',
-    user_id: 1,
-    movie_id: 15,
-  },
-  {
-    rating: 2,
-    comment: 'A brilliant political drama.',
-    user_id: 1,
-    movie_id: 16,
-  },
-  {
-    rating: 1,
-    comment: 'Action packed with great storytelling.',
-    user_id: 1,
-    movie_id: 17,
   },
 ];
 
@@ -331,8 +233,6 @@ const Mapping = {
 };
 
 module.exports = {
-  Users,
   Movies,
-  Reviews,
   Mapping,
 };

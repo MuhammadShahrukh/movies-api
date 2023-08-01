@@ -11,7 +11,7 @@ export class AuthenticationService {
 
   async signin(email: string, pass: string) {
     const user = await this.usersService.findByEmail(email, true);
-    if (!(await bcrypt.compare(pass, user.password))) {
+    if (!user || !(await bcrypt.compare(pass, user.password))) {
       throw new UnauthorizedException('Invalid Email or Password!');
     }
     const payload = { sub: user.id, email: user.email };

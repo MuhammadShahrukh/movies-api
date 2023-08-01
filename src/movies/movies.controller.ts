@@ -35,14 +35,16 @@ export class MoviesController {
 
   @UseGuards(AuthenticationGuard)
   @Post()
-  create(@Body() movie: CreateMovieDTO) {
-    return this.moviesService.create(movie);
+  async create(@Body() movie: CreateMovieDTO) {
+    await this.moviesService.create(movie);
+    return 'movie has been created successfully.';
   }
 
   @UseGuards(AuthenticationGuard)
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() movie) {
-    return this.moviesService.update(id, movie);
+  async update(@Param('id', ParseIntPipe) id: number, @Body() movie) {
+    await this.moviesService.update(id, movie);
+    return 'movie has been updated successfully.';
   }
 
   @UseGuards(AuthenticationGuard)

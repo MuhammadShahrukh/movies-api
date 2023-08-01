@@ -19,10 +19,12 @@ const createMapping = async () => {
 
 const seedMovies = async () => {
   for (let movie of Movies) {
-    let result = await prisma.movie.create({
-      data: {
-        ...movie,
+    let result = await prisma.movie.upsert({
+      where: {
+        id: movie.id,
       },
+      update: movie,
+      create: movie,
     });
     await elasticlient.index({
       index: process.env.ELASTICSEARCH_INDEX,

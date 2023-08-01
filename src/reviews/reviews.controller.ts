@@ -9,7 +9,8 @@ export class ReviewsController {
 
   @UseGuards(AuthenticationGuard)
   @Post()
-  create(@Body() body: ReviewDTO) {
-    return this.reviewsService.create(body);
+  async create(@Body() body: ReviewDTO) {
+    await this.reviewsService.create(body);
+    return 'review has been created successfully.';
   }
 }

@@ -286,8 +286,47 @@ const Reviews = [
   },
 ];
 
+const Mapping = {
+  index: process.env.ELASTICSEARCH_INDEX,
+  body: {
+    settings: {
+      analysis: {
+        analyzer: {
+          autocomplete: {
+            tokenizer: 'autocomplete',
+            filter: ['lowercase'],
+          },
+        },
+        tokenizer: {
+          autocomplete: {
+            type: 'edge_ngram',
+            min_gram: 2,
+            max_gram: 10,
+            token_chars: ['letter'],
+          },
+        },
+      },
+    },
+    mappings: {
+      properties: {
+        name: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard',
+        },
+        description: {
+          type: 'text',
+          analyzer: 'autocomplete',
+          search_analyzer: 'standard',
+        },
+      },
+    },
+  },
+};
+
 module.exports = {
   Users,
   Movies,
   Reviews,
+  Mapping,
 };

@@ -1,9 +1,21 @@
 const { PrismaClient } = require('@prisma/client');
 const { Client } = require('@elastic/elasticsearch');
 require('dotenv').config();
-const { Users, Movies, Reviews } = require('./seeders/index');
+const { Users, Movies, Reviews, Mapping } = require('./seeders/index');
 const prisma = new PrismaClient();
 const elasticlient = new Client({ node: process.env.ELASTICSEARCH_URL });
+
+const createMapping = async () => {
+  const exists = await elasticlient.indices.exists({
+    index: process.env.ELASTICSEARCH_INDEX,
+  });
+  if (!exists) {
+    let result = await elasticlient.indices.create(Mapping);
+    console.log('Elastic Mapping Created!', result);
+  } else {
+    console.log('Elastic Mapping Existed Already!');
+  }
+};
 
 const seedUsers = () => {
   const userPromises = [];
@@ -53,12 +65,13 @@ const seedMovies = async (users) => {
 
 async function main() {
   try {
+    await createMapping();
     const users = await Promise.all(seedUsers());
     const movies = await seedMovies(users);
 
-    console.log(`Data Seeded`, movies);
+    console.log(`Data Seeded Successfully!`);
   } catch (error) {
-    console.log('Error in Seeding', error);
+    console.log('Error in Seeding!', error);
   }
 }
 main()

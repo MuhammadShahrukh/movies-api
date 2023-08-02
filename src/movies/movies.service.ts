@@ -1,29 +1,39 @@
 import { Injectable } from '@nestjs/common';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { MoviesRepository } from './movies.repository';
 import { SearchService } from 'src/common/search.service';
 import { GetMoviesDto } from './dtos/get-movies.dto';
 import { SearchMoviesDto } from './dtos/seach-movies.dto';
+import {
+  MovieCreatedEvent,
+  MovieDeletedEvent,
+  MovieUpdatedEvent,
+} from './events/movie.events';
 
 @Injectable()
 export class MoviesService {
   constructor(
+    private eventEmitter: EventEmitter2,
     private readonly movieRepository: MoviesRepository,
     private readonly searchService: SearchService,
   ) {}
 
   async create(movie) {
     const movieResult = await this.movieRepository.create(movie);
-    await this.searchService.index(movieResult);
+    this.eventEmitter.emit('movie.created', new MovieCreatedEvent(movieResult));
   }
 
   async update(id: number, movie) {
     await this.movieRepository.update(id, movie);
-    await this.searchService.update(id, movie);
+    this.eventEmitter.emit(
+      'movie.updated',
+      new MovieUpdatedEvent({ id, ...movie }),
+    );
   }
 
   async delete(id: number) {
     await this.movieRepository.delete(id);
-    await this.searchService.delete(id);
+    this.eventEmitter.emit('movie.deleted', new MovieDeletedEvent(id));
   }
 
   findUnique(id: number) {

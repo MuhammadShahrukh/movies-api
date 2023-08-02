@@ -7,6 +7,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { MoviesModule } from './movies/movies.module';
 import { CommonModule } from './common/common.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ReviewsModule } from './reviews/reviews.module';
       signOptions: { expiresIn: '1d' },
     }),
     ReviewsModule,
+    EventEmitterModule.forRoot(),
   ],
   controllers: [],
   providers: [],

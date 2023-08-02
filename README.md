@@ -50,9 +50,10 @@ You can play with the APIs now!!!!!!
 
 The application includes unit tests, to run them use:
 
-````bash
+```bash
 # unit tests
 $ npm run test
+```
 
 ## APIS
 
@@ -66,7 +67,7 @@ Authenticate an existing user and return an access token.
   "email": "",
   "password": ""
 }
-````
+```
 
 ### - /authentication/signup (POST)
 

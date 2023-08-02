@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { MoviesRepository } from './movies.repository';
-import { SearchService } from 'src/common/search.service';
+import { SearchService } from '../common/search.service';
 import { GetMoviesDto } from './dtos/get-movies.dto';
 import { SearchMoviesDto } from './dtos/seach-movies.dto';
 import {

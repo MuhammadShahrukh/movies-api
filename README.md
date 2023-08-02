@@ -24,17 +24,17 @@ This application is a full-featured, review and search platform that combines th
 
 ## Prerequisites
 
-Create .env file which must have following env variables:
+Create a .env file in the root directory and set the following environment variables:
 
-APPLICATION_PORT=3000
-DATABASE_URL=""
-ELASTICSEARCH_URL=""
-ELASTICSEARCH_INDEX=""
-MYSQL_ROOT_PASSWORD=""
-MYSQL_DATABASE=""
-JWT_SECRET=""
+- `APPLICATION_PORT=3000`
+- `DATABASE_URL=""`
+- `ELASTICSEARCH_URL=""`
+- `ELASTICSEARCH_INDEX=""`
+- `MYSQL_ROOT_PASSWORD=""`
+- `MYSQL_DATABASE=""`
+- `JWT_SECRET=""`
 
-Docker is required to run the application, please install docker first.
+Docker is required to run the application. Please install Docker before proceeding.
 
 ## Running the app with Docker
 
@@ -48,10 +48,11 @@ You can play with the APIs now!!!!!!
 
 ## Test
 
-```bash
+The application includes unit tests, to run them use:
+
+````bash
 # unit tests
 $ npm run test
-```
 
 ## APIS
 
@@ -65,7 +66,7 @@ Authenticate an existing user and return an access token.
   "email": "",
   "password": ""
 }
-```
+````
 
 ### - /authentication/signup (POST)
 
@@ -84,21 +85,52 @@ Register a new user with the given details.
 
 ### - /movies/search (GET)
 
-Text search movies for given query parameters
+Searches movies for the given query parameters.
 
-```javascript
-// Query Paramters
+**Request:**
 
-  "text": "movie name",
-  "genre": "",              // optional
-  "country": "",            // optional
-  "boost_genre": "",        // optional
+Query Parameters:
 
+- `text`: The name of the movie to search for.
+- `genre`: The genre of the movie to search for (optional).
+- `country`: The country of the movie to search for (optional).
+- `boost_genre`: The genre to boost in search results (optional).
+
+**Response:**
+
+Returns a list of movies that match the given search criteria.
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Movie name",
+        "description": "Movie description",
+        "release_date": "2023-07-30T20:42:06.355Z",
+        "ticket_price": 8.5,
+        "country": "USA",
+        "genre": "Drama",
+        "photo": "https://example.com/movie.jpg",
+        "reviews": [...]
+    },
+    ...
+]
 ```
 
 ### - /movies (GET)
 
 Fetch and return a list of all available movies for given query paramters
+
+**Request:**
+
+Query Parameters:
+
+- `page`: The page number.
+- `pageSize`: Limit number of movies in one page.
+- `text`: The name of the movie to search for.
+- `genre`: The genre of the movie to search for (optional).
+- `country`: The country of the movie to search for (optional).
+- `boost_genre`: The genre to boost in search results (optional).
 
 ```javascript
 // Query Paramters
